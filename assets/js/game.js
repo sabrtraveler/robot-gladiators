@@ -1,14 +1,54 @@
-var playerName = window.prompt("what is your robot's name?");
-// What is this?
-console.log(playerName);
+var playerName = window.prompt("What is your robot's name?");
+var playerHealth = 100;
+var playerAttack = 10;
+var playerMoney = 10;
 
-console.log("This logs a string, good for leaving yourself a message");
-//this will do math and log 20
-console.log(10+10);
-//what is this
-console.log("Our robot's name is " + playerName);
+// You can also log multiple values at once like this
+console.log (playerName, playerAttack, playerHealth);
 
-function fight() {
-    window.alert("The fight  has begun!");
-}
-//fight();
+var enemyName = "Roborto";
+var enemyHealth = 50;
+var enemyAttack = 12;
+
+var fight = function() {
+    // Alert players that they are starting the round
+    window.alert("Welcome to Robot Gladiators!");
+    var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'Fight' or 'Skip' to choose.");
+
+    //if player chooses to fight, then fight
+    if (promptFight === "fight" || promptFight ==="FIGHT"){
+    //remove enemy's health by subtracting the amount set in the playerAttack variable
+    enemyHealth = enemyHealth - playerAttack;
+    console.log(
+        playerName + "attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining."
+    );
+
+    // check player's health
+    if (playerHealth <= 0) {
+        window.alert(playerName + " has died!")
+    } else {
+        window.alert(playerName + " still has " + playerHealth + " health left.");
+    }
+
+    //if player chooses to skip
+    } else if (promptFight === "skip" || promptFight === "SKIP") {
+        // confirm player wants to skip
+        var confirmSkip= window.confirm("Are you sure you'd like to quit?");
+        
+        //if yes (true), leave fight
+        if (confirmSkip) {
+            window.alert(playerName + " has decided to skip this fight. Goodbye!");
+            playerMoney = playerMoney - 2;
+        }
+        // if no (false), ask question again by running fight() again
+        else {
+            fight();
+        }
+
+    } else {
+        window.alert("You need to choose a valid option. Try again!");
+    }
+
+    };
+
+fight();
